@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import styled from "styled-components";
 import {motion} from "framer-motion";
 import {media, mediaTypes} from "../../Utils/media.js";
+import ReactDOM from 'react-dom';
 
 
 /* Client images. */
@@ -25,7 +26,14 @@ import TechMahindra from "../../Assets/Clients/tech-mahindra.png";
 import Tesco from "../../Assets/Clients/tesco.png";
 import USTGlobal from "../../Assets/Clients/ust-global.png";
 import WellsFargo from "../../Assets/Clients/wells-fargo.png";
-
+import Prestige from "../../Assets/Clients/presitge.png";
+import Raheja from "../../Assets/Clients/raheja.png";
+import RMZ from "../../Assets/Clients/rmz.png";
+import Salarpuria from "../../Assets/Clients/salarpuria.png";
+import Embassy from "../../Assets/Clients/embassy.png";
+import Kalyani from "../../Assets/Clients/kalyani.jpg";
+import Bhartiya from "../../Assets/Clients/bhartiya.jpg";
+import Total from "../../Assets/Clients/total.png";
 
 const ParentContainer = styled(motion.div)`
     display: flex;
@@ -56,7 +64,7 @@ const Container = styled(motion.div)`
     `};
 `;
 
-const ClientPods = styled.div`
+const ClientPods = styled(motion.div)`
   width : auto;
   min-width : 300px;
   height: 200px;
@@ -66,7 +74,8 @@ const ClientPods = styled.div`
   align-items: center;
   box-shadow: 4px 4px 12px rgba(170, 226, 156, 0.87), 
   -4px -4px 12px rgba(217, 217, 217, 0.1);
-
+  user-select: none;
+  cursor: pointer;
   margin: 10px;
   ${media.phone`
     margin-top: 10px;
@@ -83,41 +92,145 @@ const ContainerHeader = styled.div`
   color: #1E7C43;
   font-size :24px;
   align-self: flex-start;
-
+  justify-content: space-between;
   ${media.phone`
-    justify-content: center;
+    justify-content: space-between;
   `}
 `;
 
 const ClientsList = [
-  AllState,
-  Arista,
-  Arris,
-  BeckmanCoulter,
-  Boeing,
-  Diageo,
-  ExxonMobil,
-  Google,
-  HP,
-  Juniper,
-  Misys,
-  NTTData,
-  Sap,
-  Shell,
-  Start,
-  TechMahindra,
-  Tesco,
-  USTGlobal,
-  WellsFargo
+  {
+    id : "All State",
+    logo : AllState,
+  },
+  {
+    id : "Arista",
+    logo : Arista,
+  },
+  {
+    id : "Arris",
+    logo : Arris
+  },
+  {
+    id : "Beckman Coulter",
+    logo : BeckmanCoulter
+  },
+  {
+    id : "Diegeo",
+    logo : Diageo
+  },
+   {
+     id : "Exxon Mobil",
+     logo : ExxonMobil
+   },
+   {
+     id : "Google",
+     logo : Google
+   },
+   {
+     id : "HP",
+     logo : HP
+   },
+   {
+     id : "Juniper",
+     logo : Juniper
+   },
+   {
+     id : "Misys",
+     logo : Misys
+   },
+   {
+     id : "NTT Data",
+     logo : NTTData
+   },
+   {
+     id : "SAP",
+     logo : Sap,
+   },
+   {
+     id : "Shell",
+     logo : Shell
+   },
+   {
+     id : "Star",
+     logo : Start
+   },
+   {
+     id : "Tech Mahindra",
+     logo : TechMahindra
+   },
+   {
+     id : "Tesco",
+     logo : Tesco
+   },
+   {
+     id : "UST Global",
+     logo : USTGlobal
+   },
+   {
+     id : "Wells Fargo",
+     logo : WellsFargo
+   },
+   {
+     id : "Prestige",
+     logo : Prestige
+   },
+   {
+     id : "Raheja",
+     logo : Raheja
+   },
+   {
+     id : "RMZ",
+     logo : RMZ
+   },
+   {
+     id : "Salarpuria",
+     logo : Salarpuria
+   },
+   {
+     id : "Embassy",
+     logo : Embassy
+   },
+   {
+     id : "Kalyani",
+     logo : Kalyani
+   },
+   {
+     id : "Bhartiya",
+     logo : Bhartiya
+   },
+   {
+     id : "Total",
+     logo : Total
+   }
 ]
 
 
+
+const SearchBar = styled.input`
+  border-radius: 10px;
+  border: 0.1px solid #CCCCCC;
+  font-family: Montserrat;
+  padding: 10px;
+`;  
 export default class ClientPage extends Component {
 
     constructor(){
         super();
+        this.state = {
+          filteredClients: ClientsList
+        }
     }
 
+
+    handleSearch = (e) => {
+      const filteredClients = ClientsList
+                              .filter(client => client.id.toLowerCase()
+                              .includes(e.target.value));
+      this.setState({
+        filteredClients : filteredClients
+      })
+    }
     render(){
         return(
           <ParentContainer
@@ -130,17 +243,29 @@ export default class ClientPage extends Component {
             >
               <ContainerHeader>
                 OUR CLIENTS
+                <SearchBar 
+                  type="search" 
+                  placeholder="Search Client..."
+                  onChange={(e) => this.handleSearch(e)}
+                  >
+                </SearchBar>
               </ContainerHeader>
               {
-               ClientsList.map((value, index) => 
+                this.state.filteredClients.length > 0 ? 
+                this.state.filteredClients.map((value, index) => 
                   <ClientPods
                     key={index}
                     animate={{opacity:[0, 1]}}
-                    transition={{delay: 0.5}}
+                    transition={{duration: 0.1}}
+                    whileTap={{scale:0.88}}
                   >
-                  <img src={value} alt={index} style={{transform:"scale(0.7)"}}/>
+                  <img src={value.logo} 
+                       alt={index.logo} 
+                       style={{transform:"scale(0.7)"}} />
                   </ClientPods>
                 )
+                :
+                <div>No Clients</div>
               }
             </Container>
           </ParentContainer>
