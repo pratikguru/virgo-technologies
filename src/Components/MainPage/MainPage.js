@@ -1,36 +1,33 @@
-import React,  {Component} from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
-import {motion} from "framer-motion";
-import {media, mediaType} from "../../Utils/media.js";
+import { motion } from "framer-motion";
+import { media, mediaType } from "../../Utils/media.js";
 
 /* Images and logo import */
 import MainLogo from "../../Assets/Logo/image 1.svg";
-
-
 
 /* Main content components import. */
 import HomePage from "../HomePage/HomePage.js";
 import ProductsPage from "../ProductsPage/ProductsPage.js";
 import ClientPage from "../ClientPage/ClientPage.js";
 import ProductListing from "../HVAC Products/HVACProducts.js";
-
+import IndustrialProducts from "../Industrial Products/IndustrialProducts.js";
 
 const MainContainer = styled.div`
   display: flex;
-  width : 100%;
-  height : 100%;
- 
-  
-  flex-direction : column;
-  justify-content : flex-start;
+  width: 100%;
+  height: 100%;
+
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-`
+`;
 const TopHeader = styled.div`
-  display : flex;
-  width : 100%;
+  display: flex;
+  width: 100%;
   height: auto;
-  margin : 5px;
-  
+  margin: 5px;
+
   justify-content: space-between;
 
   ${media.phone`
@@ -41,18 +38,17 @@ const TopHeader = styled.div`
   `}
 `;
 
-
 const LogoContainer = styled.div`
   display: flex;
-  width : auto;
-  height : auto;
-  padding : 1px;
-  margin-left : 10px;
+  width: auto;
+  height: auto;
+  padding: 1px;
+  margin-left: 10px;
   margin-top: 10px;
-`
+`;
 const NavigationButtonContainer = styled(motion.div)`
   display: flex;
-  width : auto;
+  width: auto;
   height: auto;
   justify-content: center;
   align-items: center;
@@ -68,17 +64,17 @@ const NavigationButtonContainer = styled(motion.div)`
 `;
 
 const NavigationButtons = styled(motion.div)`
-  width : auto;
+  width: auto;
   min-width: 180px;
   height: 30px;
-  display : flex;
+  display: flex;
   background-color: white;
-  border-radius : 3px;
+  border-radius: 3px;
   color: black;
-  margin : 5px;
+  margin: 5px;
   justify-content: center;
   align-items: center;
-  padding : 2px;
+  padding: 2px;
 
   user-select: none;
   cursor: pointer;
@@ -91,9 +87,8 @@ const NavigationButtons = styled(motion.div)`
 `}
 `;
 
-
 const Body = styled.div`
-  width : 100%;
+  width: 100%;
   height: 100%;
   margin-top: 50px;
   display: flex;
@@ -107,70 +102,68 @@ const Body = styled.div`
   `}
 `;
 
-
-
-
-const NavigationLinks = ["Home", "Clients", "Industrial Products", "HVAC Products", "Services"];
+const NavigationLinks = [
+  "Home",
+  "Clients",
+  "Industrial Products",
+  "HVAC Products",
+  "Services",
+];
 const CurrentPage = {
-  "Home" : <HomePage/>,
-  "Industrial Products" : <ProductsPage/>,
-  "Clients" : <ClientPage/>,
-  "HVAC Products" : <ProductListing/>
-}
-
-
+  Home: <HomePage />,
+  "Industrial Products": <IndustrialProducts />,
+  Clients: <ClientPage />,
+  "HVAC Products": <ProductListing />,
+};
 
 export default class MainPage extends Component {
-    constructor(){
-        super();
-        this.state = {
-          selectedPage : "Home"
-        }
-    }
+  constructor() {
+    super();
+    this.state = {
+      selectedPage: "Home",
+    };
+  }
 
-    handleSelectedLink = (route) => {
-      this.setState({
-        selectedPage : route
-      })
-    }
-    render(){
-       return(
-        <MainContainer>
-          <TopHeader>
-            <LogoContainer>
-              <img src={MainLogo} alt="logo"/>
-            </LogoContainer>
-            <NavigationButtonContainer
-              animate={{opacity: [0,1]}}
-              transition={{delay:0.5}} 
-            >
-              {
-                NavigationLinks.map((value, index) => 
-                  <NavigationButtons
-      
-                    
-                    key={index}
-                    onClick={()=>this.handleSelectedLink(value)}
-                    whileHover={{backgroundColor: "#005C45", color: "white"}}
-                    transition={{ duration:0.1, ease:"linear"}}
-                    whileTap={{scale:0.91, backgroundColor: "#005C45", color: "white", borderBottom: "none"}}
-                  >
-                    {NavigationLinks[index]}
-                  </NavigationButtons>
-                )
-              }
-            </NavigationButtonContainer>
-          </TopHeader>
-          <Body>
-            {
-              NavigationLinks.map((value, index) => 
-                value === this.state.selectedPage ? 
-                CurrentPage[ value ]: <div></div>
-              )
-            }
-              
-          </Body>
-        </MainContainer>
-       ) 
-    }
+  handleSelectedLink = (route) => {
+    this.setState({
+      selectedPage: route,
+    });
+  };
+  render() {
+    return (
+      <MainContainer>
+        <TopHeader>
+          <LogoContainer>
+            <img src={MainLogo} alt="logo" />
+          </LogoContainer>
+          <NavigationButtonContainer
+            animate={{ opacity: [0, 1] }}
+            transition={{ delay: 0.5 }}
+          >
+            {NavigationLinks.map((value, index) => (
+              <NavigationButtons
+                key={index}
+                onClick={() => this.handleSelectedLink(value)}
+                whileHover={{ backgroundColor: "#005C45", color: "white" }}
+                transition={{ duration: 0.1, ease: "linear" }}
+                whileTap={{
+                  scale: 0.91,
+                  backgroundColor: "#005C45",
+                  color: "white",
+                  borderBottom: "none",
+                }}
+              >
+                {NavigationLinks[index]}
+              </NavigationButtons>
+            ))}
+          </NavigationButtonContainer>
+        </TopHeader>
+        <Body>
+          {NavigationLinks.map((value, index) =>
+            value === this.state.selectedPage ? CurrentPage[value] : <div></div>
+          )}
+        </Body>
+      </MainContainer>
+    );
+  }
 }
