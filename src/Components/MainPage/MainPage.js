@@ -12,6 +12,7 @@ import MainLogo from "../../Assets/Logo/image 1.svg";
 import HomePage from "../HomePage/HomePage.js";
 import ProductsPage from "../ProductsPage/ProductsPage.js";
 import ClientPage from "../ClientPage/ClientPage.js";
+import ProductListing from "../HVAC Products/HVACProducts.js";
 
 
 const MainContainer = styled.div`
@@ -113,7 +114,8 @@ const NavigationLinks = ["Home", "Clients", "Industrial Products", "HVAC Product
 const CurrentPage = {
   "Home" : <HomePage/>,
   "Industrial Products" : <ProductsPage/>,
-  "Clients" : <ClientPage/>
+  "Clients" : <ClientPage/>,
+  "HVAC Products" : <ProductListing/>
 }
 
 

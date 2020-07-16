@@ -144,12 +144,12 @@ export default class HomePage extends Component {
           <ParentContainer
             initial={{opacity: 0}}
             animate={{opacity: [0,1]}}
-            transition={{delay:0.4, ease:"linear"}} 
+            transition={{delay:0.3, ease:"linear"}} 
           >
             <Container 
               initial={{opacity: 0}}
               animate={{opacity: [0,1]}}
-              transition={{delay: 0.5}} 
+              transition={{delay: 0.3}} 
               >
               <ContainerHeader>
                 WHAT WE DO?
@@ -166,7 +166,7 @@ export default class HomePage extends Component {
               <PartnerListBody
                 initial={{opacity: 0}}
                 animate={{opacity:[0, 1]}}
-                transition={{delay: 0.7}}
+                transition={{delay: 0.3}}
               >
                 {
                   PartnerListImages.map((value, index) => 
