@@ -14,7 +14,6 @@ import Nidec from "../../Assets/Partners/nidec.png";
 import Produal from "../../Assets/Partners/produal.png";
 import Schneider from "../../Assets/Partners/schneider.png";
 import Yaskawa from "../../Assets/Partners/yaskawa.png";
-const URL ="../../Assets/Partners";
 
 const PartnerListImages = [
     Kamstrup, 
@@ -62,6 +61,10 @@ const ContainerHeader = styled.div`
   color: #1E7C43;
   font-size :24px;
   align-self: flex-start;
+  ${media.phone`
+    justify-content: center;
+  
+  `}
 `;
 
 
@@ -124,30 +127,12 @@ const PartnerCubes = styled(motion.div)`
   
     margin-top: 10px;
     width : 90%;
-  `}
+    box-shadow: 5px 5px 10px rgba(221, 148, 148, 0.25),
+                -5px -5px 10px rgba(0, 0, 0, 0.25);
+    `}
+  `;
 
-             `;
 
-const container = {
-  hidden: { opacity: 1, scale: 0 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delay: 0.02,
-      when: "beforeChildren",
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const item = {
-  hidden: { x: 20, opacity: 0 },
-  visible: {
-    x: 0,
-    opacity: 1,
-  },
-};
 
 export default class HomePage extends Component {
     constructor(){
@@ -157,9 +142,9 @@ export default class HomePage extends Component {
     render(){
         return (
           <ParentContainer
-          initial={{opacity: 0}}
-          animate={{opacity: [0,1]}}
-          transition={{delay:0.4, ease:"linear"}} 
+            initial={{opacity: 0}}
+            animate={{opacity: [0,1]}}
+            transition={{delay:0.4, ease:"linear"}} 
           >
             <Container 
               initial={{opacity: 0}}

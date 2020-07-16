@@ -94,10 +94,10 @@ const NavigationButtons = styled(motion.div)`
 const Body = styled.div`
   width : 100%;
   height: 100%;
-  
+  margin-top: 50px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
   ${media.phone`
     height: auto;
