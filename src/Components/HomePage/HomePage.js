@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { render } from "@testing-library/react";
 
 import { media, mediaTypes } from "../../Utils/media.js";
+import CustomModal from "../Modal/Modal.js";
+
 import "./styles.scss";
 
 /* Import logos and images. */
@@ -22,6 +24,15 @@ import VAV from "../../Assets/BMSImages/vav.svg";
 import vfd from "../../Assets/BMSImages/vfd.svg";
 import WaterMeter from "../../Assets/BMSImages/water-meter.svg";
 
+/* Product Images. */
+import KamstrupBTUMeter from "../../Assets/HVACProducts/kamstrup-btu-meter.png";
+import EFCFanCoilUnitController from "../../Assets/HVACProducts/efc-fan-coil-unit-controller.png";
+import EVCVAVUnitController from "../../Assets/HVACProducts/evc-vav-unit-controller.png";
+import SchneiderBMS from "../../Assets/HVACProducts/schneider-bms.png";
+import VFDDrivers from "../../Assets/HVACProducts/vfd-drivers.png";
+import YaskawaLowHarmonicVFD from "../../Assets/HVACProducts/yaskawa-low-harmonic-vfd.png";
+import SensorsImage from "../../Assets/HVACProducts/sensors.jpg";
+
 const PartnerListImages = [
   Kamstrup,
   Neptronic,
@@ -35,42 +46,66 @@ const HexaGrid = [
   [
     {
       text: "VFD",
-      img: vfd,
+      icon: vfd,
+      img: VFDDrivers,
       type: 1,
+      information: "",
+      header: "VFD Drivers",
+      sub_header: "Nidec (Emerson) drives",
     },
     {
       text: "BTU Meter",
-      img: BTUMeter,
+      icon: BTUMeter,
       type: 1,
+      img: KamstrupBTUMeter,
+      information: "",
+      header: "Kamstrup BTU Meter",
+      sub_header: "Heat metering with ULTRAFLOW",
     },
   ],
   [
     {
       text: "Sensors",
-      img: Sensors,
+      icon: Sensors,
       type: 1,
+      img: SensorsImage,
+      information: "",
+      header: "Produal Sensors",
+      sub_header: "Efficient solutions for high quality OEM products.",
     },
     {
       text: "Building Management System",
-      img: "",
+      icon: "",
       type: 0,
     },
     {
       text: "Water Meter",
-      img: WaterMeter,
+      icon: WaterMeter,
       type: 1,
+      img: KamstrupBTUMeter,
+      information: "",
+      header: "BTU water meters.",
+      sub_header: "Heat metering with ULTRAFLOW.",
     },
   ],
   [
     {
       text: "VAV",
-      img: VAV,
+      icon: VAV,
       type: 1,
+      information: "",
+      header: "EVC VAV Unit controller.",
+      img: EVCVAVUnitController,
+      sub_header: "Unit controller with TFL Thermostat.",
     },
     {
       text: "HVAC",
-      img: HVACControl,
+      icon: HVACControl,
       type: 1,
+      information: "",
+      img: YaskawaLowHarmonicVFD,
+      header: "Yaskawa Low Harmonic VFD.",
+      sub_header: "Z1000 series fan & pump drives.",
     },
   ],
 ];
@@ -193,11 +228,32 @@ const Row = styled.div``;
 export default class HomePage extends Component {
   constructor() {
     super();
+    this.state = {
+      showModal: false,
+      selectedInformation: "",
+      selectedHeader: "",
+      selectedImage: "",
+      selectedSubheader: "",
+    };
   }
 
   handlePopup = (index, index2) => {
     console.log(index, index2);
     console.log(HexaGrid[index][index2]);
+
+    this.setState({
+      showModal: true,
+      selectedInformation: HexaGrid[index][index2].information,
+      selectedHeader: HexaGrid[index][index2].header,
+      selectedImage: HexaGrid[index][index2].img,
+      selectedSubheader: HexaGrid[index][index2].sub_header,
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      showModal: false,
+    });
   };
 
   render() {
@@ -205,12 +261,12 @@ export default class HomePage extends Component {
       <ParentContainer
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 1] }}
-        transition={{ delay: 0.3, ease: "linear" }}
+        transition={{ delay: 0.1 }}
       >
         <Container
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1] }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.1 }}
         >
           <ContainerHeader>WHAT WE DO?</ContainerHeader>
           <ContainerBody>
@@ -226,7 +282,7 @@ export default class HomePage extends Component {
                         className="hexagon"
                       >
                         {value2.text}
-                        <img src={value2.img} />
+                        <img src={value2.icon} />
                       </Hexagon>
                     ) : (
                       <Hexagon key={index2} className="hexagon-center">
@@ -236,42 +292,6 @@ export default class HomePage extends Component {
                   )}
                 </Row>
               ))}
-              {/* <Row className="row">
-                <Hexagon whileTap={{ scale: 0.89 }} className="hexagon">
-                  VFD
-                  <img src={WaterMeter} />
-                </Hexagon>
-                <Hexagon whileTap={{ scale: 0.89 }} className="hexagon">
-                  BTU Meter
-                  <img src={BTUMeter} />
-                </Hexagon>
-              </Row>
-              <Row className="row">
-                <Hexagon whileTap={{ scale: 0.89 }} className="hexagon">
-                  Sensors
-                  <img src={Sensors} />
-                </Hexagon>
-                <Hexagon
-                  whileHover={{ scale: 0.89 }}
-                  className="hexagon-center"
-                >
-                  Building Management System
-                </Hexagon>
-                <Hexagon whileTap={{ scale: 0.89 }} className="hexagon">
-                  Water Meter
-                  <img src={WaterMeter} />
-                </Hexagon>
-              </Row>
-              <Row className="row">
-                <Hexagon whileTap={{ scale: 0.89 }} className="hexagon">
-                  VAV
-                  <img src={VAV} />
-                </Hexagon>
-                <Hexagon whileTap={{ scale: 0.89 }} className="hexagon">
-                  HVAC
-                  <img src={HVACControl} />
-                </Hexagon>
-              </Row> */}
             </HexContainer>
           </ContainerBody>
           <ContainerFooter>
@@ -305,6 +325,14 @@ export default class HomePage extends Component {
             ))}
           </PartnerListBody>
         </PartnerList>
+        <CustomModal
+          showModal={this.state.showModal}
+          onClose={this.handleClose}
+          img={this.state.selectedImage}
+          information={this.state.selectedInformation}
+          subHeader={this.state.selectedSubheader}
+          header={this.state.selectedHeader}
+        ></CustomModal>
       </ParentContainer>
     );
   }

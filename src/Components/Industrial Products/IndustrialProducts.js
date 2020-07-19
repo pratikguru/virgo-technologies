@@ -132,6 +132,7 @@ const SearchBar = styled.input`
   border: 0.1px solid #cccccc;
   font-family: Montserrat;
   padding: 10px;
+  font-size: 12px;
 `;
 
 const ProductPodFooter = styled.div`
