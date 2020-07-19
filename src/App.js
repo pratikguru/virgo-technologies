@@ -1,18 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 import MainPage from "../src/Components/MainPage/MainPage.js";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 
 import styled from "styled-components";
 import "./fonts/Mont.css";
+
 const Wrapper = styled.div`
-  width : 100vw;
-  height : 100vh;
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  overflow-x : hidden;
+  overflow-x: hidden;
   font-family: Montserrat;
   z-index: -1;
+  -webkit-tap-highlight-color: transparent;
 `;
 
 const SplashScreen = styled(motion.div)`
@@ -26,25 +28,71 @@ const SplashScreen = styled(motion.div)`
   z-index: 100;
   font-size: 100px;
   color: green;
+  flex-direction: column;
 `;
 
-{/* <SplashScreen
-animate={{opacity:[1, 0], zIndex:-10}}
-transition={{delay:1, ease:"linear"}}
->
-V
-</SplashScreen> */}
+const Icon = styled.div`
+  display: flex;
+  color: green;
+  font-size: 100px;
+  font-weight: 500;
+`;
 
-function App() {
-  return (
-    <Wrapper>
+const SubText = styled.div`
+  display: flex;
+  color: green;
+  font-size: 20px;
+  font-weight: 400;
+`;
 
-      <MainPage 
-        animate={{opacity:[0, 1]}}
-        transition={{delay:1.1, ease:"linear"}}
-      ></MainPage>
-    </Wrapper>
-  );
+export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      lock: false,
+    };
+  }
+
+  componentDidMount() {
+    if (window.orientation === 90 || window.orientation === -90) {
+      this.setState({
+        lock: true,
+      });
+    } else {
+      this.setState({
+        lock: false,
+      });
+    }
+
+    window.addEventListener("orientationchange", () => {
+      console.log("Orientation change detected.");
+      console.log(window.orientation);
+      if (window.orientation === 90 || window.orientation === -90) {
+        this.setState({
+          lock: true,
+        });
+      } else {
+        this.setState({
+          lock: false,
+        });
+      }
+    });
+  }
+  render() {
+    return (
+      <Wrapper>
+        {this.state.lock ? (
+          <SplashScreen>
+            <Icon>V</Icon>
+            <SubText>This site is visible in potrait mode only!</SubText>
+          </SplashScreen>
+        ) : (
+          <MainPage
+            animate={{ opacity: [0, 1] }}
+            transition={{ delay: 1.1, ease: "linear" }}
+          ></MainPage>
+        )}
+      </Wrapper>
+    );
+  }
 }
-
-export default App;

@@ -1,0 +1,83 @@
+@mixin hexagon($size, $gutter, $color, $fontWeight) {
+  position: relative;
+  width: $size;
+  height: ($size * 0.577);
+  background-color: $color;
+  margin: ($size * 0.288) 0;
+  margin-right: $gutter;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1);
+  user-select: none;
+  cursor: pointer;
+  border-radius: 3px;
+  flex-direction: column;
+  text-align: center;
+  font-size: 14px;
+  font-weight: $fontWeight;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-tap-highlight-color: transparent;
+  ::selection {
+    color: none;
+    background-color: none;
+  }
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    left: 0;
+    border-left: ($size/2) solid transparent;
+    border-right: ($size/2) solid transparent;
+  }
+
+  &:before {
+    bottom: 100%;
+    border-bottom: ($size * 0.288) solid $color;
+    border-radius: 3px;
+    user-select: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    ::selection {
+      color: none;
+      background-color: none;
+    }
+  }
+
+  &:after {
+    top: 100%;
+    width: 0;
+    border-top: ($size * 0.288) solid $color;
+    border-radius: 3px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    ::selection {
+      color: none;
+      background-color: none;
+    }
+  }
+}
+
+$size: 7rem;
+$gutter: 0.25rem;
+
+.container {
+  padding: 2rem;
+}
+.row {
+  margin-top: calc(((#{$size} * 0.288) * -1 + #{$gutter}));
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.hexagon {
+  @include hexagon($size, $gutter, #98e09b, 400);
+}
+
+.hexagon-center {
+  @include hexagon($size, $gutter, #5dbcab, 500);
+}

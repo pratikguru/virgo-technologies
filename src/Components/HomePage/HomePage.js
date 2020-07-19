@@ -1,10 +1,10 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 import { render } from "@testing-library/react";
 
-import {media, mediaTypes} from "../../Utils/media.js";
-
+import { media, mediaTypes } from "../../Utils/media.js";
+import "./styles.scss";
 
 /* Import logos and images. */
 
@@ -15,15 +15,65 @@ import Produal from "../../Assets/Partners/produal.png";
 import Schneider from "../../Assets/Partners/schneider.png";
 import Yaskawa from "../../Assets/Partners/yaskawa.png";
 
-const PartnerListImages = [
-    Kamstrup, 
-    Neptronic, 
-    Nidec, 
-    Produal, 
-    Schneider, 
-    Yaskawa
-  ]
+import BTUMeter from "../../Assets/BMSImages/btu-meter.svg";
+import HVACControl from "../../Assets/BMSImages/hvac-control-system.svg";
+import Sensors from "../../Assets/BMSImages/sensors.svg";
+import VAV from "../../Assets/BMSImages/vav.svg";
+import vfd from "../../Assets/BMSImages/vfd.svg";
+import WaterMeter from "../../Assets/BMSImages/water-meter.svg";
 
+const PartnerListImages = [
+  Kamstrup,
+  Neptronic,
+  Nidec,
+  Produal,
+  Schneider,
+  Yaskawa,
+];
+
+const HexaGrid = [
+  [
+    {
+      text: "VFD",
+      img: vfd,
+      type: 1,
+    },
+    {
+      text: "BTU Meter",
+      img: BTUMeter,
+      type: 1,
+    },
+  ],
+  [
+    {
+      text: "Sensors",
+      img: Sensors,
+      type: 1,
+    },
+    {
+      text: "Building Management System",
+      img: "",
+      type: 0,
+    },
+    {
+      text: "Water Meter",
+      img: WaterMeter,
+      type: 1,
+    },
+  ],
+  [
+    {
+      text: "VAV",
+      img: VAV,
+      type: 1,
+    },
+    {
+      text: "HVAC",
+      img: HVACControl,
+      type: 1,
+    },
+  ],
+];
 
 const ParentContainer = styled(motion.div)`
   display: flex;
@@ -31,25 +81,24 @@ const ParentContainer = styled(motion.div)`
   align-items: center;
   justify-content: center;
   width: 100%;
-`
+`;
 
 const Container = styled(motion.div)`
-    width : 80%;
-    height: auto;
-    display: flex;
-    background-color: white;
-    box-shadow: 20px 20px 60px rgba(170, 226, 156, 0.87), 
+  width: 80%;
+  height: auto;
+  display: flex;
+  background-color: white;
+  box-shadow: 20px 20px 60px rgba(170, 226, 156, 0.87),
     -20px -20px 60px rgba(217, 217, 217, 0.19);
-    border-radius: 17px;
-    padding: 10px;
-    flex-direction: column;
+  border-radius: 17px;
+  padding: 10px;
+  flex-direction: column;
 
-    ${media.phone`
+  ${media.phone`
       width : 90%;
       height: 90%;
     `};
 `;
-
 
 const ContainerHeader = styled.div`
   display: flex;
@@ -58,8 +107,8 @@ const ContainerHeader = styled.div`
   padding: 5px;
   font-family: Montserrat;
   font-weight: 500;
-  color: #1E7C43;
-  font-size :24px;
+  color: #1e7c43;
+  font-size: 24px;
   align-self: flex-start;
   ${media.phone`
     justify-content: center;
@@ -67,18 +116,24 @@ const ContainerHeader = styled.div`
   `}
 `;
 
-
 const ContainerBody = styled(motion.div)`
   width: 80%;
+  height: auto;
   display: flex;
   align-self: center;
-  height: 250px;
+
   padding: 5px;
   margin-top: 50px;
   font-family: Montserrat;
   border-radius: 17px;
-  box-shadow: 20px 20px 60px rgba(179, 244, 237, 0.65), 
-  -20px -20px 60px rgba(172, 232, 221, 0.09);
+  box-shadow: 20px 20px 60px rgba(179, 244, 237, 0.65),
+    -20px -20px 60px rgba(172, 232, 221, 0.09);
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  ${media.phone`
+    width : 90%;
+  `}
 `;
 
 const ContainerFooter = styled.div`
@@ -86,9 +141,10 @@ const ContainerFooter = styled.div`
   height: auto;
   padding: 5px;
   margin-top: 30px;
-  font-size : 16px;
+  font-size: 16px;
   text-align: center;
   align-self: center;
+  margin-bottom: 30px;
 `;
 
 const PartnerList = styled(Container)`
@@ -108,20 +164,18 @@ const PartnerListBody = styled(motion.div)`
   `}
 `;
 
-const PartnerListHeader = styled(ContainerHeader)`
-`;
+const PartnerListHeader = styled(ContainerHeader)``;
 
 const PartnerCubes = styled(motion.div)`
-
-  width : auto;
-  height : 45px;
+  width: auto;
+  height: 45px;
   border-radius: 10px;
   display: flex;
   padding: 10px;
   justify-content: center;
   align-items: center;
   box-shadow: 15px 15px 60px rgba(221, 148, 148, 0.25),
-             -10px -10px 60px rgba(0, 0, 0, 0.25);
+    -10px -10px 60px rgba(0, 0, 0, 0.25);
 
   ${media.phone`
   
@@ -130,60 +184,128 @@ const PartnerCubes = styled(motion.div)`
     box-shadow: 5px 5px 10px rgba(221, 148, 148, 0.25),
                 -5px -5px 10px rgba(0, 0, 0, 0.25);
     `}
-  `;
+`;
 
-
+const Hexagon = styled(motion.div)``;
+const HexContainer = styled.div``;
+const Row = styled.div``;
 
 export default class HomePage extends Component {
-    constructor(){
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    render(){
-        return (
-          <ParentContainer
-            initial={{opacity: 0}}
-            animate={{opacity: [0,1]}}
-            transition={{delay:0.3, ease:"linear"}} 
+  handlePopup = (index, index2) => {
+    console.log(index, index2);
+    console.log(HexaGrid[index][index2]);
+  };
+
+  render() {
+    return (
+      <ParentContainer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 1] }}
+        transition={{ delay: 0.3, ease: "linear" }}
+      >
+        <Container
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 1] }}
+          transition={{ delay: 0.3 }}
+        >
+          <ContainerHeader>WHAT WE DO?</ContainerHeader>
+          <ContainerBody>
+            <HexContainer className="container">
+              {HexaGrid.map((value, index) => (
+                <Row className="row" key={index}>
+                  {value.map((value2, index2) =>
+                    value2.type ? (
+                      <Hexagon
+                        onClick={() => this.handlePopup(index, index2)}
+                        key={index2}
+                        whileTap={{ scale: 0.89 }}
+                        className="hexagon"
+                      >
+                        {value2.text}
+                        <img src={value2.img} />
+                      </Hexagon>
+                    ) : (
+                      <Hexagon key={index2} className="hexagon-center">
+                        {value2.text}
+                      </Hexagon>
+                    )
+                  )}
+                </Row>
+              ))}
+              {/* <Row className="row">
+                <Hexagon whileTap={{ scale: 0.89 }} className="hexagon">
+                  VFD
+                  <img src={WaterMeter} />
+                </Hexagon>
+                <Hexagon whileTap={{ scale: 0.89 }} className="hexagon">
+                  BTU Meter
+                  <img src={BTUMeter} />
+                </Hexagon>
+              </Row>
+              <Row className="row">
+                <Hexagon whileTap={{ scale: 0.89 }} className="hexagon">
+                  Sensors
+                  <img src={Sensors} />
+                </Hexagon>
+                <Hexagon
+                  whileHover={{ scale: 0.89 }}
+                  className="hexagon-center"
+                >
+                  Building Management System
+                </Hexagon>
+                <Hexagon whileTap={{ scale: 0.89 }} className="hexagon">
+                  Water Meter
+                  <img src={WaterMeter} />
+                </Hexagon>
+              </Row>
+              <Row className="row">
+                <Hexagon whileTap={{ scale: 0.89 }} className="hexagon">
+                  VAV
+                  <img src={VAV} />
+                </Hexagon>
+                <Hexagon whileTap={{ scale: 0.89 }} className="hexagon">
+                  HVAC
+                  <img src={HVACControl} />
+                </Hexagon>
+              </Row> */}
+            </HexContainer>
+          </ContainerBody>
+          <ContainerFooter>
+            Virgo Technologies is a Premier Solutions Provider for BMS products
+            from Schneider Electric, Neptronic VAVs, Kamstrup BTU meters, Nidec
+            (formerly Emerson) and Yasakawa/VFD, & Produal Finland for Field
+            Devices. We partner with M/S. Schneider Electric for the BMS system
+            to provide Advanced technology Building Automation System. Our
+            solutions range from implementing simple field control system to
+            complete vision systems. We provide proven cost-effective, quality-
+            engineered solutions, working in partnership to meet and exceed the
+            expectations of our valued customers.
+          </ContainerFooter>
+        </Container>
+        <PartnerList>
+          <PartnerListHeader>OUR PARTNERS</PartnerListHeader>
+          <PartnerListBody
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1] }}
+            transition={{ delay: 0.3 }}
           >
-            <Container 
-              initial={{opacity: 0}}
-              animate={{opacity: [0,1]}}
-              transition={{delay: 0.3}} 
+            {PartnerListImages.map((value, index) => (
+              <PartnerCubes
+                key={index}
+                whileTap={{ scale: 0.88 }}
+                animate={{ opacity: [0, 1], delay: 0.1 }}
               >
-              <ContainerHeader>
-                WHAT WE DO?
-              </ContainerHeader>
-              <ContainerBody></ContainerBody>
-              <ContainerFooter>
-              Virgo Technologies is a Premier Solutions Provider for BMS products from Schneider Electric, Neptronic VAVs, Kamstrup BTU meters, Nidec (formerly Emerson) and Yasakawa/VFD, & Produal Finland for Field Devices. We partner with M/S. Schneider Electric for the BMS system to provide Advanced technology Building Automation System. Our solutions range from implementing simple field control system to complete vision systems. We provide proven cost-effective, quality- engineered solutions, working in partnership to meet and exceed the expectations of our valued customers.
-              </ContainerFooter>
-            </Container>
-            <PartnerList>
-          	  <PartnerListHeader>
-                OUR PARTNERS
-              </PartnerListHeader>
-              <PartnerListBody
-                initial={{opacity: 0}}
-                animate={{opacity:[0, 1]}}
-                transition={{delay: 0.3}}
-              >
-                {
-                  PartnerListImages.map((value, index) => 
-                  <PartnerCubes
-                    key={index}
-                    whileTap={{scale:0.88}}
-                    animate={{opacity:[0, 1], delay:0.1}}
-                    
-                  > 
-                    {console.log(value)}
-                    <img src={value} alt={index}/>
-                  </PartnerCubes>
-                  )
-                }
-              </PartnerListBody>
-            </PartnerList>
-          </ParentContainer>
-        )
-    }
+                {console.log(value)}
+                <img src={value} alt={index} />
+              </PartnerCubes>
+            ))}
+          </PartnerListBody>
+        </PartnerList>
+      </ParentContainer>
+    );
+  }
 }

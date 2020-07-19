@@ -217,7 +217,7 @@ export default class ProductListing extends Component {
 
   handleSearch = (e) => {
     const filteredClients = HVACProductImageList.filter((client) =>
-      client.id.toLowerCase().includes(e.target.value)
+      client.id.toLowerCase().includes(e.target.value.toLowerCase())
     );
     this.setState({
       filteredProducts: filteredClients,
@@ -226,7 +226,10 @@ export default class ProductListing extends Component {
 
   render() {
     return (
-      <ParentContainer>
+      <ParentContainer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 1], delay: 0.4 }}
+      >
         <Container>
           <ContainerHeader>
             HVAC Products
