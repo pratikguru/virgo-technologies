@@ -304,7 +304,7 @@ export default class HomePage extends Component {
             solutions range from implementing simple field control system to
             complete vision systems. We provide proven cost-effective, quality-
             engineered solutions, working in partnership to meet and exceed the
-            expectations of our valued customers.
+            expectations of our valued customers. Also.
           </ContainerFooter>
         </Container>
         <PartnerList>
