@@ -8,7 +8,6 @@ import MainLogo from "../../Assets/Logo/image 1.svg";
 
 /* Main content components import. */
 import HomePage from "../HomePage/HomePage.js";
-import ProductsPage from "../ProductsPage/ProductsPage.js";
 import ClientPage from "../ClientPage/ClientPage.js";
 import ProductListing from "../HVAC Products/HVACProducts.js";
 import IndustrialProducts from "../Industrial Products/IndustrialProducts.js";
@@ -144,13 +143,15 @@ export default class MainPage extends Component {
               <NavigationButtons
                 key={index}
                 onClick={() => this.handleSelectedLink(value)}
-                whileHover={{ backgroundColor: "#005C45", color: "white" }}
+                whileHover={{
+                  backgroundColor: "#005C45",
+                  color: "rgba(255, 255, 255, 1)",
+                }}
                 transition={{ duration: 0.1, ease: "linear" }}
                 whileTap={{
                   scale: 0.91,
                   backgroundColor: "#005C45",
-                  color: "white",
-                  borderBottom: "none",
+                  color: "rgba(255, 255, 255, 1)",
                 }}
               >
                 {NavigationLinks[index]}
@@ -160,7 +161,11 @@ export default class MainPage extends Component {
         </TopHeader>
         <Body>
           {NavigationLinks.map((value, index) =>
-            value === this.state.selectedPage ? CurrentPage[value] : <div></div>
+            value === this.state.selectedPage ? (
+              CurrentPage[value]
+            ) : (
+              <div key={index}></div>
+            )
           )}
         </Body>
       </MainContainer>

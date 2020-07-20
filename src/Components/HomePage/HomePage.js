@@ -116,6 +116,7 @@ const ParentContainer = styled(motion.div)`
   align-items: center;
   justify-content: center;
   width: 100%;
+  padding-bottom: 100px;
 `;
 
 const Container = styled(motion.div)`
@@ -319,7 +320,6 @@ export default class HomePage extends Component {
                 whileTap={{ scale: 0.88 }}
                 animate={{ opacity: [0, 1], delay: 0.1 }}
               >
-                {console.log(value)}
                 <img src={value} alt={index} />
               </PartnerCubes>
             ))}
